@@ -1,0 +1,30 @@
+{
+  "name": "eng-language-support",
+  "displayName": "ENG Language Support",
+  "description": "Syntax highlighting and error checking for .eng language",
+  "version": "0.0.1",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:eng"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "eng",
+        "aliases": ["ENG language"],
+        "extensions": [".eng"]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "eng",
+        "scopeName": "source.eng",
+        "path": "./syntaxes/eng.tmLanguage.json"
+      }
+    ]
+  }
+}

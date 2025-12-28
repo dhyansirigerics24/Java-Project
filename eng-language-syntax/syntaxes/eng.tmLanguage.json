@@ -1,0 +1,13 @@
+{
+  "scopeName": "source.eng",
+  "patterns": [
+    {
+      "name": "keyword.control",
+      "match": "\\b(SET|ADD|DIV|PRINT|TRY|CATCH|FINALLY|ENDTRY)\\b"
+    },
+    {
+      "name": "constant.numeric",
+      "match": "\\b\\d+\\b"
+    }
+  ]
+}
