@@ -1,0 +1,29 @@
+# ======================
+# Java compiled files
+# ======================
+*.class
+
+# ======================
+# VS Code (user specific)
+# ======================
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/extensions.json
+
+# ======================
+# OS generated files
+# ======================
+.DS_Store
+Thumbs.db
+
+# ======================
+# Logs / temp
+# ======================
+*.log
+temp/
+tmp/
+
+# ======================
+# Node (safety)
+# ======================
+node_modules/
