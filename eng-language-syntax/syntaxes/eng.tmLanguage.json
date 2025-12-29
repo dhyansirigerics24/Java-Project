@@ -3,11 +3,34 @@
   "patterns": [
     {
       "name": "keyword.control",
-      "match": "\\b(SET|ADD|DIV|PRINT|TRY|CATCH|FINALLY|ENDTRY|IF|ELSE|ENDIF|WHILE|ENDWHILE)\\b"
+      "match": "\\b(SET|ADD|DIV|PRINT|TRY|CATCH|FINALLY|ENDTRY|IF|ELSE|ENDIF|WHILE|ENDWHILE|CLASS|ENDCLASS|NEW)\\b"
+    },
+    {
+      "name": "storage.type",
+      "match": "\\b(int|float|boolean|string|char|double)\\b"
+    },
+    {
+      "name": "constant.language",
+      "match": "\\b(true|false|null)\\b"
     },
     {
       "name": "constant.numeric",
-      "match": "\\b\\d+\\b"
+      "match": "\\b\\d+(\\.\\d+)?\\b"
+    },
+    {
+      "name": "string.quoted.double",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape",
+          "match": "\\\\."
+        }
+      ]
+    },
+    {
+      "name": "comment.line",
+      "match": "//.*$"
     }
   ]
 }
