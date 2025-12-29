@@ -1,13 +1,43 @@
-SET x = 10
-SET y = 0
+PRINT "=== Primitive Types ===";
+int x = 10;
+float f = 2.5;
+string s = "Hello";
+boolean b = true;
+PRINT x;
+PRINT f;
+PRINT s;
+PRINT b;
 
-TRY
-    DIV x y
-    PRINT x
-CATCH
-    PRINT ERROR
-FINALLY
-    PRINT DONE
-ENDTRY
+PRINT "=== Math Operations ===";
+ADD x 5;
+PRINT x; 
+DIV f 2;
+PRINT f; 
+ADD s " World";
+PRINT s; 
 
-PRINT x
+PRINT "=== Control Flow ===";
+IF x > 10
+    PRINT "x is greater than 10";
+ELSE
+    PRINT "x is small";
+ENDIF
+
+int count = 2;
+WHILE count > 0
+   PRINT count;
+   ADD count -1;
+ENDWHILE
+
+PRINT "=== Classes and Objects ===";
+CLASS Person
+    string name;
+    int age;
+ENDCLASS
+
+Person p = NEW Person;
+SET p.name = "Alice";
+SET p.age = 25;
+PRINT p.name;
+PRINT p.age;
+PRINT "Done";

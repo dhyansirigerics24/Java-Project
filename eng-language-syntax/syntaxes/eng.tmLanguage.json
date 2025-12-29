@@ -3,7 +3,7 @@
   "patterns": [
     {
       "name": "keyword.control",
-      "match": "\\b(SET|ADD|DIV|PRINT|TRY|CATCH|FINALLY|ENDTRY)\\b"
+      "match": "\\b(SET|ADD|DIV|PRINT|TRY|CATCH|FINALLY|ENDTRY|IF|ELSE|ENDIF|WHILE|ENDWHILE)\\b"
     },
     {
       "name": "constant.numeric",
