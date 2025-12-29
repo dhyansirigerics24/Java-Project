@@ -14,7 +14,9 @@ Welcome to the **ENG Language** project! This repository contains a complete eco
 Located in `english-lang-noinstall-complete/`, this is a lightweight, no-install interpreter written in Java.
 
 ### Key Features
-*   **Simple Syntax**: Write code using English words like `SET`, `ADD`, `DIV`, `PRINT`.
+*   **Typed Variables**: Declare `int`, `float`, `string`, `boolean` for type safety.
+*   **Simple Syntax**: Use English words like `SET`, `ADD`, `DIV`, `PRINT`, `CLASS`, `NEW`.
+*   **Object-Oriented**: Define classes and create objects.
 *   **Error Handling**: Robust `TRY-CATCH-FINALLY` blocks.
 *   **Zero Dependencies**: Runs on any machine with standard Java installed.
 
@@ -57,17 +59,25 @@ To test or use this extension locally:
 Here is a snippet of valid `ENG` code:
 
 ```text
-SET x = 10
-SET y = 5
+int x = 10;
+int y = 5;
 
 TRY
-    DIV x y
-    PRINT x
+    DIV x y;
+    PRINT x;
 CATCH
-    PRINT ERROR
+    PRINT "Error";
 FINALLY
-    PRINT DONE
+    PRINT "Done";
 ENDTRY
+
+CLASS Person
+    string name;
+ENDCLASS
+
+Person p = NEW Person;
+SET p.name = "John";
+PRINT p.name;
 ```
 
 ## 📄 License
