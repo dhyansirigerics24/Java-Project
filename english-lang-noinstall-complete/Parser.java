@@ -2,34 +2,38 @@ import java.util.*;
 
 public class Parser {
 
+
     public static void parse(List<String> lines, Context context) throws LanguageException {
+        // Preprocess: Remove comments
+        List<String> validLines = removeComments(lines);
+
         // First Pass: Register Classes
-        for (int i = 0; i < lines.size(); i++) {
-            String line = lines.get(i).trim();
+        for (int i = 0; i < validLines.size(); i++) {
+            String line = validLines.get(i).trim();
             if (line.isEmpty()) continue;
             
             if (line.startsWith("CLASS")) {
-                i = handleClassDefinition(lines, i, context);
+                i = handleClassDefinition(validLines, i, context);
             }
         }
 
         // Second Pass: Execute Code
-        for (int i = 0; i < lines.size(); i++) {
-            String line = lines.get(i).trim();
+        for (int i = 0; i < validLines.size(); i++) {
+            String line = validLines.get(i).trim();
             if (line.isEmpty()) continue;
             
             // Skip Class Definitions in execution pass
             if (line.startsWith("CLASS")) {
-                i = skipBlock(lines, i);
+                i = skipBlock(validLines, i);
                 continue;
             }
 
             if (line.startsWith("TRY")) {
-                i = handleTryBlock(lines, i, context);
+                i = handleTryBlock(validLines, i, context);
             } else if (line.startsWith("IF")) {
-                i = handleIfBlock(lines, i, context);
+                i = handleIfBlock(validLines, i, context);
             } else if (line.startsWith("WHILE")) {
-                i = handleWhileBlock(lines, i, context);
+                i = handleWhileBlock(validLines, i, context);
             } else {
                 // Enforce Semicolon for Statements
                 if (!line.endsWith(";")) {
@@ -39,6 +43,37 @@ public class Parser {
                 executeLine(cleanLine, context);
             }
         }
+    }
+
+    private static List<String> removeComments(List<String> lines) {
+        List<String> cleaned = new ArrayList<>();
+        boolean inBlockComment = false;
+
+        for (String line : lines) {
+            StringBuilder validContent = new StringBuilder();
+            for (int i = 0; i < line.length(); i++) {
+                if (inBlockComment) {
+                    if (i + 1 < line.length() && line.charAt(i) == '*' && line.charAt(i + 1) == '/') {
+                        inBlockComment = false;
+                        i++; // Skip /
+                    }
+                } else {
+                    if (i + 1 < line.length() && line.charAt(i) == '/' && line.charAt(i + 1) == '*') {
+                        inBlockComment = true;
+                        i++; // Skip *
+                    } else if (i + 1 < line.length() && line.charAt(i) == '/' && line.charAt(i + 1) == '/') {
+                        break; // Ignore rest of line
+                    } else {
+                        validContent.append(line.charAt(i));
+                    }
+                }
+            }
+            // Add if not empty (maintain line count correlation? No, loops use size(), logic relies on structure)
+            // But if we remove empty lines here, line numbers might get confusing if we ever tracked them.
+            // For now, simpler to just add what remains.
+            cleaned.add(validContent.toString());
+        }
+        return cleaned;
     }
     
     // Parses and registers a class
@@ -89,15 +124,7 @@ public class Parser {
                 Executor.instantiateObject(t[0], t[1], t[4], context);
             } else {
                 // Primitive Declaration
-                // Reconstruct value string if it has spaces (strings)
-                // With tokenize, t[3] should be the full string token if quoted
                 String valStr = t[3]; 
-                // But wait, if complex expression? "Hello " ? 
-                // If the user did: int x = 10; -> t[3]="10"
-                // string s = "Hello World"; -> t[3]="\"Hello World\""
-                // Logic simplifed: just take t[3]. 
-                // BUT what if: ADD x y ? 
-                // Declaration expect t[3] to be value.
                 Executor.declareVariable(t[0], t[1], valStr, context);
             }
             return;
@@ -124,7 +151,7 @@ public class Parser {
         }
     }
     
-    // Custom tokenizer that respects quoted strings
+    // Custom tokenizer that respects quoted strings AND commas
     private static String[] tokenize(String line) {
         List<String> tokens = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
@@ -135,7 +162,7 @@ public class Parser {
             if (c == '"') {
                 inQuotes = !inQuotes;
                 sb.append(c);
-            } else if (Character.isWhitespace(c) && !inQuotes) {
+            } else if ((Character.isWhitespace(c) || c == ',') && !inQuotes) {
                 if (sb.length() > 0) {
                     tokens.add(sb.toString());
                     sb.setLength(0);

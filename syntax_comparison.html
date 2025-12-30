@@ -1,87 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Syntax Comparison: English Language vs Java</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; color: #333; }
-        h1 { border-bottom: 2px solid #007acc; padding-bottom: 10px; color: #007acc; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; vertical-align: top; }
-        th { background-color: #f4f4f4; color: #333; font-weight: bold; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-        code { background-color: #f0f0f0; padding: 2px 5px; border-radius: 4px; font-family: 'Consolas', monospace; color: #d63384; display: inline-block; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 10px;
+            color: #007acc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            color: #d63384;
+            display: inline-block;
+        }
     </style>
 </head>
+
 <body>
 
-<h1>Syntax Comparison: English Language vs Java</h1>
+    <h1>Syntax Comparison: English Language vs Java</h1>
 
-<p>This document outlines the key syntax differences between the <strong>English Language</strong> (your custom interpreter) and <strong>Java</strong>.</p>
+    <p>This document outlines the key syntax differences between the <strong>English Language</strong> (your custom
+        interpreter) and <strong>Java</strong>.</p>
 
-<table>
-    <thead>
-        <tr>
-            <th>Feature</th>
-            <th>English Language</th>
-            <th>Java</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Variable Declaration</strong></td>
-            <td><code>int x = 10;</code><br><code>string s = "Hello";</code></td>
-            <td><code>int x = 10;</code><br><code>String s = "Hello";</code></td>
-        </tr>
-        <tr>
-            <td><strong>Printing</strong></td>
-            <td><code>PRINT x;</code><br><code>PRINT "Hello";</code></td>
-            <td><code>System.out.println(x);</code><br><code>System.out.println("Hello");</code></td>
-        </tr>
-        <tr>
-            <td><strong>Assignment</strong></td>
-            <td><code>SET x = 20;</code><br><code>SET p.name = "John";</code></td>
-            <td><code>x = 20;</code><br><code>p.name = "John";</code></td>
-        </tr>
-        <tr>
-            <td><strong>Arithmetic</strong></td>
-            <td><code>ADD x 5;</code> <em>(Modifies x)</em><br><code>DIV y 2;</code></td>
-            <td><code>x += 5;</code> or <code>x = x + 5;</code><br><code>y /= 2;</code></td>
-        </tr>
-        <tr>
-            <td><strong>Conditionals</strong></td>
-            <td><code>IF x > 10</code><br>&nbsp;&nbsp;<code>PRINT "Yes";</code><br><code>ELSE</code><br>&nbsp;&nbsp;<code>PRINT "No";</code><br><code>ENDIF</code></td>
-            <td><code>if (x > 10) {</code><br>&nbsp;&nbsp;<code>System.out.println("Yes");</code><br><code>} else {</code><br>&nbsp;&nbsp;<code>System.out.println("No");</code><br><code>}</code></td>
-        </tr>
-        <tr>
-            <td><strong>Loops</strong></td>
-            <td><code>WHILE x > 0</code><br>&nbsp;&nbsp;<code>ADD x -1;</code><br><code>ENDWHILE</code></td>
-            <td><code>while (x > 0) {</code><br>&nbsp;&nbsp;<code>x--;</code><br><code>}</code></td>
-        </tr>
-        <tr>
-            <td><strong>Class Definition</strong></td>
-            <td><code>CLASS Person</code><br>&nbsp;&nbsp;<code>string name;</code><br>&nbsp;&nbsp;<code>int age;</code><br><code>ENDCLASS</code></td>
-            <td><code>class Person {</code><br>&nbsp;&nbsp;<code>String name;</code><br>&nbsp;&nbsp;<code>int age;</code><br><code>}</code></td>
-        </tr>
-        <tr>
-            <td><strong>Object Instantiation</strong></td>
-            <td><code>Person p = NEW Person;</code></td>
-            <td><code>Person p = new Person();</code></td>
-        </tr>
-        <tr>
-            <td><strong>Exception Handling</strong></td>
-            <td><code>TRY</code>...<code>CATCH</code>...<code>FINALLY</code>...<code>ENDTRY</code></td>
-            <td><code>try {</code>...<code>} catch (Exception e) {</code>...<code>} finally {</code>...<code>}</code></td>
-        </tr>
-    </tbody>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>English Language</th>
+                <th>Java</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Variable Declaration</strong></td>
+                <td><code>int x = 10;</code><br><code>string s = "Hello";</code></td>
+                <td><code>int x = 10;</code><br><code>String s = "Hello";</code></td>
+            </tr>
+            <tr>
+                <td><strong>Printing</strong></td>
+                <td><code>PRINT x;</code><br><code>PRINT "Hello";</code></td>
+                <td><code>System.out.println(x);</code><br><code>System.out.println("Hello");</code></td>
+            </tr>
+            <tr>
+                <td><strong>Assignment</strong></td>
+                <td><code>SET x = 20;</code><br><code>SET p.name = "John";</code></td>
+                <td><code>x = 20;</code><br><code>p.name = "John";</code></td>
+            </tr>
+            <tr>
+                <td><strong>Arithmetic</strong></td>
+                <td><code>ADD x 5;</code> <em>(Modifies x)</em><br><code>ADD x x, 5;</code><br><code>DIV y 2;</code>
+                </td>
+                <td><code>x += 5;</code><br><code>x = x + 5;</code><br><code>y /= 2;</code></td>
+            </tr>
+            <tr>
+                <td><strong>Conditionals</strong></td>
+                <td><code>IF x > 10</code><br>&nbsp;&nbsp;<code>PRINT "Yes";</code><br><code>ELSE</code><br>&nbsp;&nbsp;<code>PRINT "No";</code><br><code>ENDIF</code>
+                </td>
+                <td><code>if (x > 10) {</code><br>&nbsp;&nbsp;<code>System.out.println("Yes");</code><br><code>} else {</code><br>&nbsp;&nbsp;<code>System.out.println("No");</code><br><code>}</code>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Loops</strong></td>
+                <td><code>WHILE x > 0</code><br>&nbsp;&nbsp;<code>ADD x -1;</code><br><code>ENDWHILE</code></td>
+                <td><code>while (x > 0) {</code><br>&nbsp;&nbsp;<code>x--;</code><br><code>}</code></td>
+            </tr>
+            <tr>
+                <td><strong>Class Definition</strong></td>
+                <td><code>CLASS Person</code><br>&nbsp;&nbsp;<code>string name;</code><br>&nbsp;&nbsp;<code>int age;</code><br><code>ENDCLASS</code>
+                </td>
+                <td><code>class Person {</code><br>&nbsp;&nbsp;<code>String name;</code><br>&nbsp;&nbsp;<code>int age;</code><br><code>}</code>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Object Instantiation</strong></td>
+                <td><code>Person p = NEW Person;</code></td>
+                <td><code>Person p = new Person();</code></td>
+            </tr>
+            <tr>
+                <td><strong>Exception Handling</strong></td>
+                <td><code>TRY</code>...<code>CATCH</code>...<code>FINALLY</code>...<code>ENDTRY</code></td>
+                <td><code>try {</code>...<code>} catch (Exception e) {</code>...<code>} finally {</code>...<code>}</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-<h2>Key Differences Using This Interpreter</h2>
-<ul>
-    <li><strong>Keywords</strong>: Uses <code>PRINT</code>, <code>SET</code>, <code>ADD</code> vs Java's <code>System.out</code>, <code>=</code>, <code>+=</code>.</li>
-    <li><strong>Structure</strong>: Uses <code>END</code> keywords (<code>ENDIF</code>) instead of braces <code>{ }</code>.</li>
-    <li><strong>Semicolons</strong>: Required!</li>
-</ul>
+    <h2>Key Differences Using This Interpreter</h2>
+    <ul>
+        <li><strong>Keywords</strong>: Uses <code>PRINT</code>, <code>SET</code>, <code>ADD</code> vs Java's
+            <code>System.out</code>, <code>=</code>, <code>+=</code>.</li>
+        <li><strong>Structure</strong>: Uses <code>END</code> keywords (<code>ENDIF</code>) instead of braces
+            <code>{ }</code>.</li>
+        <li><strong>Semicolons</strong>: Required!</li>
+    </ul>
 
 </body>
+
 </html>

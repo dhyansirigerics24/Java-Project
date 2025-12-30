@@ -11,8 +11,12 @@ PRINT b;
 PRINT "=== Math Operations ===";
 ADD x 5;
 PRINT x; 
+// 3-operand ADD
+ADD x x, f;
+PRINT x;
 DIV f 2;
-PRINT f; 
+PRINT f;
+/* String concatenation */ 
 ADD s " World";
 PRINT s; 
 

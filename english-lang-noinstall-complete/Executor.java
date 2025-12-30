@@ -67,31 +67,46 @@ public class Executor {
     }
 
     public static void addValue(String[] t, Context c) throws LanguageException {
-        // ADD target operand
-        if (!c.hasVariable(t[1])) throw new LanguageException("Variable " + t[1] + " not found");
-        Value target = c.getVariable(t[1]);
-        Value operand = getValue(t[2], c);
+        // ADD target operand (Legacy)
+        // ADD target op1 op2 (New)
         
-        if (target.getType().equals("int") && operand.getType().equals("int")) {
-            target.setValue((int)target.getValue() + (int)operand.getValue());
+        String targetName = t[1];
+        if (!c.hasVariable(targetName)) throw new LanguageException("Variable " + targetName + " not found");
+        Value target = c.getVariable(targetName);
+        
+        Value v1, v2;
+        
+        if (t.length >= 4) {
+             // ADD x x,5 -> t=["ADD", "x", "x", "5"] (comma handled by tokenizer)
+             v1 = getValue(t[2], c);
+             v2 = getValue(t[3], c);
+        } else {
+             // Legacy: ADD x 5 -> x = x + 5
+             v1 = target; // Use current value as first operand
+             v2 = getValue(t[2], c);
+        }
+
+        if (target.getType().equals("int") && v1.getType().equals("int") && v2.getType().equals("int")) {
+            target.setValue((int)v1.getValue() + (int)v2.getValue());
         } else if ((target.getType().equals("float") || target.getType().equals("int")) && 
-                   (operand.getType().equals("float") || operand.getType().equals("int"))) {
-            // Promote to float
-            float v1 = Float.parseFloat(target.getValue().toString());
-            float v2 = Float.parseFloat(operand.getValue().toString());
-            target.setValue(v1 + v2);
-            // If target was int, we might have issue. 
-            // Rigid typing: can't change type of target. 
-            // If target is int, and result is float -> Error or Cast?
-            // "int" + "float" -> usually float. If target is declared "int", we can't store float.
+                   (isNumber(v1) && isNumber(v2))) {
+            float val1 = Float.parseFloat(v1.getValue().toString());
+            float val2 = Float.parseFloat(v2.getValue().toString());
+            
             if (target.getType().equals("int")) {
-                 target.setValue((int)(v1 + v2)); 
+                 target.setValue((int)(val1 + val2));
+            } else {
+                 target.setValue(val1 + val2);
             }
         } else if (target.getType().equals("string")) {
-            target.setValue(target.getValue().toString() + operand.getValue().toString());
+            target.setValue(v1.getValue().toString() + v2.getValue().toString());
         } else {
-             throw new LanguageException("Cannot ADD types " + target.getType() + " and " + operand.getType());
+             throw new LanguageException("Cannot ADD types in compatible way");
         }
+    }
+    
+    private static boolean isNumber(Value v) {
+        return v.getType().equals("int") || v.getType().equals("float");
     }
 
     public static void divideValue(String[] t, Context c) throws LanguageException {
